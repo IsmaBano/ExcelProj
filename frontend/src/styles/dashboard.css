@@ -1,0 +1,229 @@
+.dashboard-wrapper {
+  height: 100vh;
+  padding: 30px;
+  font-family: 'Circe Contrast', sans-serif;
+  box-sizing: border-box;
+  gap: 20px;
+  font-weight: bold;
+}
+
+
+/* Wrapper for top two columns */
+.top-columns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex: 1 1 auto; /* fill available height */
+  min-height: 0; /* prevent overflow */
+}
+
+/* LEFT COLUMN: Dashboard panel */
+.left-column {
+ display: flex;
+ flex-direction: column;
+  padding: 1rem;
+  flex-grow: inherit;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+  margin: 1rem;
+  gap: 16px; /* space between child sections */
+}
+@media (max-width: 1200px) {
+  .top-columns{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+  }
+ .left-column{
+  min-width: none;
+ }
+}
+
+
+.quick-actions {
+  display: flex;
+  flex-direction: column; /* stack heading above buttons */
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.quick-actions h3 {
+  font-size: 16px;
+  margin: 0 0 10px 0; /* space below heading */
+  color: #0d1524;
+  font-weight: bolder;
+  white-space: nowrap;
+}
+
+.quick-actions .buttons-row {
+  display: flex;
+  gap: 10px;       /* space between buttons */
+}
+
+.quick-actions button {
+  flex: 1; /* equal width */
+  padding: 11px 1px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0d1524;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 120px;
+}
+
+.quick-actions button:hover {
+  background-color: #c7c7c7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  
+}
+
+
+
+
+/* RIGHT COLUMN: Activity Summary */
+.right-column {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: visible;
+}
+@media (max-width: 1000px) {
+  .right-column {
+    width: 100%;
+  }
+}
+
+/* Activity Summary */
+.activity-summary {
+  background: white;
+  padding: 20px 25px;
+  border-radius: 14px;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 12px rgb(0 0 0 / 0.1);  
+  z-index: 1;
+  position: relative;
+  font-weight: bold;
+}
+
+.activity-summary h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #0d1524;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.activity-list-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 9px;
+  background-color: #fafafa;
+}
+
+.activity-list-scroll ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  
+}
+
+.activity-list-scroll li {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color:#0d1524;
+  line-height: 1.4;
+  font-weight:bold
+  
+}
+
+/* BOTTOM PANEL: Full width below top columns */
+.bottom-panel {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding-top: 20px;
+  width: 100%; /* full width */
+  box-sizing: border-box;
+}
+
+/* Recent uploads container */
+.recent-uploads-container {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  flex: 1; /* take all available width */
+  box-sizing: border-box;
+  /* Removed margin-left: -32rem; */
+  box-shadow: 0 0 12px rgb(0 0 0 / 0.1);  
+  background-color: #ffffff; /* solid white */
+  z-index: 1;
+  position: relative;
+}
+
+.recent-uploads-container h3 {
+  margin: 0 0 15px 0;
+  flex-shrink: 0;
+  font-weight: bold;
+  
+}
+
+.recent-uploads-scroll {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+.recent-uploads {
+  width: 100%;
+  
+}
+
+.recent-uploads table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.recent-uploads th,
+.recent-uploads td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #ccc;
+  font-size: 15px;
+  text-align: left;
+}
+
+.recent-uploads td:last-child {
+  text-align: center;
+}
+
+.recent-uploads button {
+  padding: 7px 14px;
+  border: none;
+  background: #d1d1d1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #0d1524;
+  transition: background 0.3s ease;
+}
+
+.recent-uploads button:hover {
+  background: #bdbdbd;
+}

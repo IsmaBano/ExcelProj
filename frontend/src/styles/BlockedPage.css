@@ -1,0 +1,26 @@
+.blocked-container {
+  height: 100vh;
+  background-color: #1f1f1f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blocked-card {
+  background-color: #2e2e2e;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.blocked-button {
+  margin-top: 1.5rem;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

@@ -1,0 +1,192 @@
+.activitylog-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  font-family: 'Circe Contrast', sans-serif;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+  z-index: 1;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.activitylog-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+/* Filters section */
+.filters {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filters input[type="text"],
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  min-width: 160px;
+}
+
+/* Date input with arrow icon */
+.filters input[type="date"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  min-width: 160px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* Results dropdown label */
+.results-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.results-filter label {
+  color: #333;
+}
+
+.results-filter select {
+  width: 60px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 32px;
+}
+
+/* Table styling */
+.activity-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.activity-table th,
+.activity-table td {
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.activity-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #333;
+}
+
+.activity-table tr:last-child td {
+  border-bottom: none;
+}
+
+.status-processed {
+  color: green;
+  font-weight: 500;
+}
+
+.status-pending {
+  color: red;
+  font-weight: 500;
+}
+
+/* Action buttons */
+.view-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 12px; /* gap between view and delete */
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.view-btn:hover svg,
+.delete-btn:hover svg {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* Pagination container */
+.pagination-container {
+  display: flex;
+  justify-content: space-between; /* puts items on left and right */
+  align-items: center;
+  margin-top: 3rem;
+  padding: 0 0.5rem;
+  font-size: 13px;
+  flex-wrap: wrap;
+  font-weight: bold;
+}
+
+/* Pagination buttons */
+.pagination-wrapper .pagination-btn,
+.pagination-wrapper .pagination-nav {
+  padding: 2px 8px;
+  font-size: 13px;
+}
+
+.pagination-nav {
+  background: none;
+  border: none;
+  color: #888;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pagination-nav:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-btn {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn.active {
+  border: 1px solid #999;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+/* Pagination info below */
+.pagination-info {
+  color: #666;
+  font-size: 13px;
+  text-align: left;
+}

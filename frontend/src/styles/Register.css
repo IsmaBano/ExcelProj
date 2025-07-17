@@ -1,0 +1,279 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100vh;
+  width: 100%;
+  font-family: 'Circe Contrast', sans-serif;
+  background-color: #e9e5e5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Decorative corners */
+.corner {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: #0d1524;
+  border-radius: 40px;
+  transform: rotate(45deg);
+  z-index: 0;
+  transition: opacity 0.5s ease;
+}
+
+.corner.top-left {
+  top: -200px;
+  left: -50px;
+  animation: slideInTopLeft 1.2s ease-out forwards;
+}
+
+.corner.bottom-right {
+  bottom: -200px;
+  right: -50px;
+  animation: slideInBottomRight 1.2s ease-out forwards;
+}
+
+
+/* Register Card */
+.register-card {
+    width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 2rem 2rem;
+  z-index: 2;
+  animation: fadeInZoom 1.2s ease-out forwards;
+  opacity: 0;
+ margin: 2rem auto;
+}
+@media (max-width: 480px) {
+  .register-card {
+   margin: 25px;
+  }
+}
+/* Content */
+.register-content {
+  width: 100%;
+  text-align: center;
+}
+
+h2 {
+  font-family: 'Cooper Hewitt', serif;
+  color: #0d1524;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .register-content h2{
+      font-size: 1rem;
+      font-weight: 300;
+      text-wrap:inherit;
+  }
+}
+/* Input Group */
+.register-input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.register-input-group input,
+.register-input-group select {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #506e90;
+  background: transparent;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.75rem 0 0.3rem;
+  color: #000;
+  font-family: inherit;
+}
+
+.register-input-group label {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  font-size: 1rem;
+  color: #506e90;
+  font-weight: 600;
+  pointer-events: none;
+  transition: 0.3s ease all;
+}
+
+/* Button */
+.register-btn {
+  width: 100%;
+  padding: 0.85rem 0;
+  border: 2px solid #506e90;
+  background-color: transparent;
+  color: #506e90;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Register Link */
+.register-link {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #506e90;
+  font-weight: 700;
+}
+
+.register-link a {
+  color: #34508a;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.register-link a:hover {
+  color: #1f3561;
+}
+
+/* Animations */
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInTopLeft {
+  0% {
+    transform: translate(-150%, -150%) rotate(45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottomRight {
+  0% {
+    transform: translate(150%, 150%) rotate(45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+/* Responsive Tweaks */
+@media (max-width: 480px) {
+  .register-card {
+    margin-left: 0rem;
+    width: 20rem;   
+    margin-top: -3rem;
+  }
+
+  .corner {
+    width: 500px;
+    height: 500px;
+  }
+
+  .corner.top-left {
+    top: -100px;
+    left: -300px;
+  }
+
+  .corner.bottom-right {
+    bottom: -100px;
+    right: -300px;
+  }
+
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .register-btn {
+    font-size: 0.9rem;
+  }
+
+
+}
+
+
+/* Responsive: Tablet */
+@media (max-width: 768px) {
+  .card {
+    margin-left:0rem;
+  }
+
+h2 {
+  font-family: 'Cooper Hewitt', serif;
+  white-space: nowrap;
+}
+
+
+  .corner {
+    width: 500px;
+    height: 500px;
+  }
+
+  .corner.top-left {
+    top: -150px;
+    left: -150px;
+  }
+
+  .corner.bottom-right {
+    bottom: -150px;
+    right: -150px;
+  }
+
+  .input-group label {
+    font-size: 1rem;
+  }
+
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .card {
+    margin-left:14rem;
+  }
+
+  .corner {
+    width: 500px;
+    height: 500px;
+  }
+
+  .corner.top-left {
+    top: -150px;
+    left: -150px;
+  }
+
+  .corner.bottom-right {
+    bottom: -150px;
+    right: -150px;
+  }
+
+  .input-group label {
+    font-size: 1rem;
+  }
+
+
+}
+

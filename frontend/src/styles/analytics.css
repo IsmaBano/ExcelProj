@@ -1,0 +1,298 @@
+/* 🔹 Page container */
+.analytics-container {
+  background: white;
+  padding: 24px;
+  height: 85dvh;
+  overflow: hidden;
+  font-family: 'Circe Contrast', sans-serif;
+  font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 🔹 Page title */
+.analytics-header {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* 🔹 Main section */
+.chart-section {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  height: calc(100% - 72px);
+  box-sizing: border-box;
+}
+
+/* 🔹 Sidebar Controls */
+.sidebar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 220px;
+  margin-top: 2rem;
+}
+
+.sidebar-controls label {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--gray-dark);
+  display: block;
+}
+
+.sidebar-controls select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #94a3b8; /* subtle slate-gray border */
+  font-size: 14px;
+  background-color: var(--white);
+  color: #0f172a;
+  width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sidebar-controls select:focus {
+  outline: none;
+  border-color: #0d1524;
+  box-shadow: 0 0 0 3px rgba(13, 21, 36, 0.2);
+}
+
+/* Apply extra spacing in 3D mode */
+.three-d-mode .sidebar-controls {
+  margin-top: 0rem;
+}
+
+/* 🔹 Export Buttons */
+.download-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 3rem;
+}
+
+.download-buttons button {
+  flex: 1;
+  padding: 11px 1px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0d1524;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 120px;
+}
+
+.download-buttons button:hover {
+  background-color: #c7c7c7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Apply extra spacing in 3D mode */
+.three-d-mode .download-buttons {
+  margin-top: 0rem;
+}
+
+
+/* 🔹 Chart main wrapper */
+.chart-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 🔹 Chart type toggle */
+.chart-type-toggle {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 0;
+  margin-top: -10px;
+}
+
+.chart-type-toggle button {
+  flex: 1;
+  padding: 10px 8px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0d1524;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 120px;
+}
+
+.chart-type-toggle button:hover {
+  background-color: #c7c7c7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chart-type-toggle .active {
+  background-color: #c7c7c7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 🔹 Chart display area */
+/* 🔹 Chart Main Container */
+.chart-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* 🔹 Chart Type Toggle Buttons */
+.chart-type-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.chart-type-toggle button {
+  flex: 1;
+  padding: 10px 12px;
+  background-color: #e0e0e0;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0d1524;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 100px;
+  text-transform: capitalize;
+}
+
+.chart-type-toggle button:hover {
+  background-color: #c7c7c7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.chart-type-toggle .active {
+  background-color: #0d1524;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Chart Display Area */
+.chart-display {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  flex: 1;
+  min-height: 280px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  margin-top: -1rem; /* Reduced from 4rem to bring it up */
+}
+
+
+/* 🔹 Chart Wrapper */
+.chart-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.chart-wrapper.small {
+  max-width: 300px;
+  max-height: 300px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.chart-wrapper.large {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* Floating AI toggle button with zoom animation */
+.floating-ai-toggle {
+  position: absolute;
+  top: 15px;
+  right: 20px; /* ⬅️ Move to right */
+  transform: none; /* ⬅️ Remove translateX */
+  z-index: 100;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  font-size: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  animation: zoomInOut 2s infinite ease-in-out;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes zoomInOut {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+  
+
+/* Static floating AI panel */
+.floating-ai-panel {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 70%;
+  max-width: 900px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* 🔹 Responsive layout */
+@media (max-width: 768px) {
+  .chart-section {
+    flex-direction: column;
+    padding: 16px;
+    height: auto;
+  }
+
+  .sidebar-controls {
+    width: 100%;
+  }
+
+  .chart-display {
+    width: 100%;
+  }
+}

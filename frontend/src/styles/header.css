@@ -1,0 +1,51 @@
+.headerlayout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  height: 70px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.headerlayout-left,
+.headerlayout-center,
+.headerlayout-right {
+  display: flex;
+  align-items: center;
+}
+
+.headerlayout-left {
+  flex: 1;
+}
+
+.headerlayout-center {
+  flex: 2;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.headerlayout-right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.headerlayout-logo {
+  height: 45px;
+  object-fit: contain;
+}
+
+.headerlayout-profile-pic {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.headerlayout-profile-pic:hover {
+  transform: scale(1.05);
+}

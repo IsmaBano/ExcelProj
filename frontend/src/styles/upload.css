@@ -1,0 +1,239 @@
+/*upload*/
+
+.upload-container {
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.upload-title {
+  margin-bottom: 30px;
+}
+
+.upload-layout {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+@media (max-width:1000px) {
+  .upload-layout{
+    flex-direction: column;
+  }
+}
+
+.upload-left,
+.upload-right {
+  width: 100%;
+  flex-grow: inherit;
+  height: 560px; /* Set same fixed height */
+  background: #f4f4f4;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 7px rgb(0 0 0 / 0.1);
+  position: relative;
+  box-sizing: border-box; /* Ensures padding doesn't increase size */
+  overflow-y: auto; /* Allows scroll if content exceeds height */
+  font-family: 'Circe Contrast', sans-serif;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.upload-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  border: 3px dashed #ccc;
+  border-radius: 12px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.upload-box:hover {
+  border-color: #888;
+  background-color: #f0f0f0;
+}
+
+.upload-box.drag-active {
+  border-color: #4caf50;
+  background-color: #e8f5e9;
+}
+
+.upload-icon-text {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+}
+
+.upload-icon-text .browse-link {
+  color: #007bff;
+  font-weight: bold;
+  text-decoration: solid;
+  cursor: pointer;
+}
+
+.upload-icon {
+  margin-bottom: 16px;
+  color: #0d1b2a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-icon-text p {
+  font-size: 15px;
+  color: #333;
+}
+
+.browse-link {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.upload-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-success img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 15px;
+  margin-top: -29px;
+  margin-left: 60px; /* Keep the image slightly to the right */
+  transition: transform 0.3s ease;
+  align-items: center;
+  animation: fadeZoomUpload 0.8s ease-out both;
+}
+
+.reupload {
+  margin-top: 10px;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* --- No Preview --- */
+.no-preview {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Push content upward */
+  flex-direction: column;
+  padding: 40px 20px 20px;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.no-preview img {
+  width: 100%;
+  max-width: 500px; /* large image */
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+  margin-top: -100px; /* move image upward */
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+/* --- File Preview Container --- */
+.file-preview {
+  max-width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  padding: 25px 30px;
+  font-family: 'Circe Contrast', sans-serif;
+  color: #222;
+  margin-top: 2rem;
+}
+
+/* Title styling */
+.file-preview h3 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 22px;
+  color: #111;
+  text-align: left;
+}
+
+/* File details line */
+.file-details p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+/* Label styling */
+.file-details p span.label {
+  font-weight: 600;
+  flex: 1;
+}
+
+/* Value styling */
+.file-details p span.value {
+  text-align: right;
+  flex: 1;
+  color: #444;
+}
+
+/* --- Analyze Button --- */
+.analyze-button {
+  flex: 1; /* equal width */
+  padding: 11px 1px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0d1524;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  min-width: 120px;
+}
+
+.analyze-button:hover {
+  background-color: #c7c7c7;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
+@keyframes fadeZoomUpload {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
