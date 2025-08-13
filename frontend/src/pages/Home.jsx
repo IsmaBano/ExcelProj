@@ -9,16 +9,18 @@ import '../styles/font.css';
 function Home() {
   return (
     <>
+   
       <Navbar />
-      <div className="home-container">
-        <div className="top-section">
+     
+      <div className="home-container mt-16">
+        <div className="top-section mt-5">
           {/* Left image */}
           <div className="image-frame">
             <img src={dashboardImg} alt="Analytics Dashboard" />
           </div>
 
           {/* Right text */}
-          <div className="text-content">
+          <div className="text-content ">
             <h1><b>EXCEL ANALYTICS <br /> PLATFORM</b></h1>
             <p>
               A platform to the use of Microsoft Excel, or similar spreadsheet software,

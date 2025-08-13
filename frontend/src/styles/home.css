@@ -10,7 +10,6 @@ h1 {
 
 .home-container {
   background-color: #e9e5e5;
-  overflow: hidden;
   font-family: Arial, sans-serif;
   position: relative;
   display: flex;
@@ -43,8 +42,9 @@ h1 {
 .text-content {
   flex: 1;
   max-width: 600px;
+  padding-top: 5rem;
   color: #1b1c3a;
-  margin-top: 3rem;
+  margin-top: 4rem;
   font-family: 'Circe Contrast', sans-serif;
 }
 
@@ -212,7 +212,9 @@ h1 {
     margin: 1rem auto 2rem auto;
     padding: 15px;
   }
-
+ .nav{
+  height: fit-content;
+ }
   .image-frame img {
     width: 100%;
     height: auto;

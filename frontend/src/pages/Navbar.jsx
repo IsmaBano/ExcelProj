@@ -12,7 +12,7 @@ function Navbar() {
         </div>
 
         <div className="center-title">
-          EXCEL ANALYSIS PLATFORM
+          EXCEL ANALYTICS PLATFORM
         </div>
 
         <div className="links">
