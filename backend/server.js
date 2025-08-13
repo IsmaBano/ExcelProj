@@ -3,17 +3,21 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const path = require("path");
 
 // Load environment variables
 dotenv.config();
+
+
 
 // Initialize express app
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:3000', // Update to your frontend URL in production
+  origin: process.env.URL,
   credentials: true,
 }));
 app.use(express.json());
@@ -29,8 +33,8 @@ const recordRoutes = require("./routes/record");
 const activityRoutes = require("./routes/activity");
 const aiSuggestionRoutes = require('./routes/aiRoutes');
 const recentChartsRoutes = require('./routes/recentCharts');
-const adminRoutes = require('./routes/admin');               // Admin user management
-const adminAnalyticsRoutes = require('./routes/adminAnalytics'); // Usage analytics
+const adminRoutes = require('./routes/admin');               
+const adminAnalyticsRoutes = require('./routes/adminAnalytics'); 
 
 // ✅ Mount API Routes
 app.use("/api/auth", authRoutes);                   // Login/Register
@@ -73,12 +77,13 @@ app.get("/api/storage", async (req, res) => {
   }
 });
 
-//  Default Root Route
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Welcome to the Excel Analytics Platform API" });
+// Connect to MongoDB & Start Server
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+app.get(/^\/(?!api\/).*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
 
-// Connect to MongoDB & Start Server
 connectDB()
   .then(() => {
     console.log(" MongoDB connected successfully");
