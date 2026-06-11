@@ -1,7 +1,8 @@
 // controllers/recordController.js (create this file)
-const ExcelRecord = require('../models/excelRecord');
+import ExcelRecord from '../models/excelRecord.js';
 
-const getMyUploads = async (req, res) => {
+
+export const getMyUploads = async (req, res) => {
   try {
     // req.user.id or req.user._id depends on your auth middleware
     const userId = req.user._id;
@@ -16,4 +17,4 @@ const getMyUploads = async (req, res) => {
   }
 };
 
-module.exports = { getMyUploads };
+

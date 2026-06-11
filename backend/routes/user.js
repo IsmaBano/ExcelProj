@@ -1,10 +1,11 @@
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const router = express.Router();
+import express from 'express';
+import bcrypt from 'bcryptjs';
 
-const User = require("../models/user");
-const { protect, adminOnly } = require("../middleware/auth");
-const upload = require("../middleware/uploadImage");
+import User from '../models/user.js';
+import { protect, adminOnly } from '../middleware/auth.js';
+import upload from '../middleware/uploadImage.js';
+
+const router = express.Router();
 
 // ✅ Update user's lastSeen (ping)
 router.patch('/ping', protect, async (req, res) => {
@@ -121,4 +122,4 @@ router.get("/admin/dashboard", protect, adminOnly, (req, res) => {
   res.json({ success: true, message: "Welcome Admin!" });
 });
 
-module.exports = router;
+export default router;

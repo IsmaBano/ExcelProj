@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
+import XLSX from 'xlsx';
+import ExcelRecord from '../models/excelRecord.js';
+import Activity from '../models/Activity.js';
+import { protect } from '../middleware/auth.js';
+
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
-const XLSX = require('xlsx');
-const ExcelRecord = require('../models/excelRecord');
-const Activity = require('../models/Activity');
-const { protect } = require('../middleware/auth');
 
 // Multer configuration (store in memory)
 const storage = multer.memoryStorage();
@@ -79,4 +80,4 @@ router.post('/', protect, upload.single('file'), async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,10 +1,10 @@
-const XLSX = require('xlsx');
-const path = require('path');
-const fs = require('fs'); // for file cleanup
-const ExcelRecord = require('../models/excelRecord');
-const Activity = require('../models/Activity');
+import XLSX from 'xlsx';
+import path from 'path';
+import fs from 'fs';
+import ExcelRecord from '../models/excelRecord.js';
+import Activity from '../models/Activity.js';
 
-const uploadExcelFile = async (req, res) => {
+export const uploadExcelFile = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ success: false, message: 'No file uploaded' });
@@ -54,4 +54,3 @@ const uploadExcelFile = async (req, res) => {
   }
 };
 
-module.exports = { uploadExcelFile };

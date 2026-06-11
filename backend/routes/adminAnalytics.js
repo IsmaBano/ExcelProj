@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express';
+import ExcelRecord from '../models/excelRecord.js';
+import RecentChart from '../models/recentChart.js';
+import Activity from '../models/Activity.js';
+import User from '../models/user.js';
+import { protect, adminOnly } from '../middleware/auth.js';
+
 const router = express.Router();
-const ExcelRecord = require('../models/excelRecord');
-const RecentChart = require('../models/recentChart');
-const Activity = require('../models/Activity');
-const User = require('../models/user');
-const { protect, adminOnly } = require('../middleware/auth');
 
 router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
   try {
@@ -12,7 +13,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
     const oneMonthAgo = new Date(now);
     oneMonthAgo.setMonth(now.getMonth() - 1);
 
-    //  Top Uploaders (filter only normal users)
     const topUploaders = await ExcelRecord.aggregate([
       { $group: { _id: "$uploadedBy", count: { $sum: 1 } } },
       { $sort: { count: -1 } },
@@ -30,7 +30,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $project: { username: "$user.username", count: 1 } }
     ]);
 
-    // 📅 Upload Trends
     const uploadTrends = await ExcelRecord.aggregate([
       {
         $group: {
@@ -41,7 +40,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $sort: { _id: 1 } }
     ]);
 
-    // 📄 File Types
     const fileTypes = await ExcelRecord.aggregate([
       {
         $group: {
@@ -60,7 +58,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $sort: { count: -1 } }
     ]);
 
-    // ✅ Individual User Upload Activity (only users with role: user)
     const allUsers = await User.find({ role: 'user' }).select('username profileImage');
     const userUploads = await ExcelRecord.aggregate([
       {
@@ -88,13 +85,11 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       };
     });
 
-    // 📊 Viewed Chart Types
     const viewedChartTypes = await RecentChart.aggregate([
       { $group: { _id: "$chartType", count: { $sum: 1 } } },
       { $sort: { count: -1 } }
     ]);
 
-    // 🔍 Top Analyzed Files
     const topAnalyzedFiles = await RecentChart.aggregate([
       { $match: { action: 'analyze' } },
       { $group: { _id: "$recordId", count: { $sum: 1 } } },
@@ -112,20 +107,17 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $project: { filename: "$record.filename", count: 1 } }
     ]);
 
-    // ⏰ Peak Analysis Hours
     const peakAnalysisHours = await RecentChart.aggregate([
       { $project: { hour: { $hour: "$createdAt" } } },
       { $group: { _id: "$hour", count: { $sum: 1 } } },
       { $sort: { _id: 1 } }
     ]);
 
-    // 📤 Export Stats
     const exportStats = await Activity.aggregate([
       { $match: { action: { $in: ["export_pdf", "export_png"] } } },
       { $group: { _id: "$action", count: { $sum: 1 } } }
     ]);
 
-    // 📅 Daily Active Users
     const dailyActiveUsers = await Activity.aggregate([
       {
         $group: {
@@ -144,7 +136,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $sort: { _id: 1 } }
     ]);
 
-    // 🧑‍🤝‍🧑 Registrations (only role: user)
     const registrations = await User.aggregate([
       { $match: { role: "user" } },
       {
@@ -156,13 +147,11 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $sort: { _id: 1 } }
     ]);
 
-    // 😴 Inactive Users (only role: user)
     const inactiveUsers = await User.find({
       lastLogin: { $lt: oneMonthAgo },
       role: "user"
     }).select("username email");
 
-    // 🔥 Login Heatmap
     const loginHeatmap = await Activity.aggregate([
       { $match: { action: "login" } },
       {
@@ -180,7 +169,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $sort: { "_id.day": 1, "_id.hour": 1 } }
     ]);
 
-    // 📊 User-wise Analysis Count
     const userAnalysisStats = await RecentChart.aggregate([
       { $match: { action: 'analyze' } },
       {
@@ -208,7 +196,6 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
       { $sort: { count: -1 } }
     ]);
 
-    // ✅ Final Response
     res.json({
       fileUploadStats: {
         topUploaders,
@@ -237,4 +224,4 @@ router.get('/usage-analytics', protect, adminOnly, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

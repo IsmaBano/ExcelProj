@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const excelRecordSchema = new mongoose.Schema({
   filename: {
@@ -20,4 +20,5 @@ const excelRecordSchema = new mongoose.Schema({
   },
 },{timestamps:true});
 
-module.exports = mongoose.model('ExcelRecord', excelRecordSchema);
+const ExcelRecord = mongoose.model('ExcelRecord', excelRecordSchema);
+export default ExcelRecord;

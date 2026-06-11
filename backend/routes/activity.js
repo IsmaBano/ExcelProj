@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
+import Activity from '../models/Activity.js';
+import { protect } from '../middleware/auth.js';
+import mongoose from 'mongoose';
+
 const router = express.Router();
-const Activity = require('../models/Activity');
-const { protect } = require('../middleware/auth');
-const mongoose = require('mongoose');
 
 // GET /api/activity/recent
-// GET /api/activity/recent (now returns all logs for the user)
 router.get('/recent', protect, async (req, res) => {
   try {
     const logs = await Activity.find({ userId: req.user.id })
@@ -16,14 +16,12 @@ router.get('/recent', protect, async (req, res) => {
   }
 });
 
-
-// POST /api/activity/analyze/:id  (new analyze logging route)
+// POST /api/activity/analyze/:id
 router.post('/analyze/:id', protect, async (req, res) => {
   try {
     const { filename } = req.body;
     const recordId = req.params.id;
-    
-    // ✅ Always create a new log
+
     await Activity.create({
       userId: req.user.id,
       action: 'analyze',
@@ -33,21 +31,20 @@ router.post('/analyze/:id', protect, async (req, res) => {
     });
 
     res.status(200).json({ success: true, message: 'Analyze activity logged' });
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Failed to log analyze activity.' });
   }
 });
 
-
+// GET /api/activity/test-activity-log
 router.get('/test-activity-log', protect, async (req, res) => {
   try {
     const log = await Activity.create({
       userId: req.user.id,
-      action: 'delete', // ✅ should match enum
+      action: 'delete',
       filename: 'test.xlsx',
-      recordId: new mongoose.Types.ObjectId(), // dummy ObjectId
+      recordId: new mongoose.Types.ObjectId(),
     });
     res.json({ success: true, log });
   } catch (err) {
@@ -56,5 +53,4 @@ router.get('/test-activity-log', protect, async (req, res) => {
   }
 });
 
-
-module.exports = router;
+export default router;

@@ -1,9 +1,16 @@
-const multer = require('multer');
-const path = require('path');
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+// ESM-compatible __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Storage engine configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, path.join(__dirname, 'uploads/'));
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
@@ -12,6 +19,7 @@ const storage = multer.diskStorage({
   }
 });
 
+// Excel file type filter
 const fileFilter = (req, file, cb) => {
   const allowedTypes = [
     'application/vnd.ms-excel',
@@ -25,10 +33,11 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
+// Multer upload middleware
 const upload = multer({
   storage,
   fileFilter,
   limits: { fileSize: 5 * 1024 * 1024 } // 5 MB
 });
 
-module.exports = upload;
+export default upload;

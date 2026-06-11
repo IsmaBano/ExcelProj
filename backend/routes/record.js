@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import ExcelRecord from '../models/excelRecord.js';
+import { protect } from '../middleware/auth.js';
+import Activity from '../models/Activity.js';
+
 const router = express.Router();
-const ExcelRecord = require('../models/excelRecord');
-const { protect } = require('../middleware/auth'); // Auth middleware to populate req.user
-const Activity = require('../models/Activity');
 
 /**
  * @route   GET /api/records/myuploads
@@ -100,4 +101,4 @@ router.delete('/:id', protect, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

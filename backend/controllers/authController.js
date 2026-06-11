@@ -1,9 +1,9 @@
-const usermodel = require("../models/user");
-const bcrypt = require("bcrypt");
-const generateToken = require("../utils/generateTokens");
+import usermodel from "../models/user.js";
+import bcrypt from "bcrypt";
+import generateToken from "../utils/generateTokens.js";
 
 // REGISTER USER
-const registeruser = async (req, res) => {
+ export const registeruser = async (req, res) => {
   try {
     const { username, email, password, role } = req.body;
 
@@ -55,7 +55,7 @@ const registeruser = async (req, res) => {
 };
 
 // LOGIN USER
-const loginUser = async (req, res) => {
+ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -114,4 +114,4 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registeruser, loginUser };
+

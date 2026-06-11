@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const recentChartSchema = new mongoose.Schema({
   userId: {
@@ -28,4 +28,5 @@ const recentChartSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-module.exports = mongoose.model('RecentChart', recentChartSchema);
+const RecentChart = mongoose.model('RecentChart', recentChartSchema);
+export default RecentChart;

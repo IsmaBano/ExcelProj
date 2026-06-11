@@ -1,9 +1,12 @@
-const express = require('express');
+import express from 'express';
+import dotenv from 'dotenv';
+import axios from 'axios';
+import { protect } from '../middleware/auth.js';
+import ExcelRecord from '../models/excelRecord.js';
+
+dotenv.config();
+
 const router = express.Router();
-const { protect } = require('../middleware/auth');
-const ExcelRecord = require('../models/excelRecord');
-const axios = require('axios');
-require('dotenv').config();
 
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
@@ -45,7 +48,7 @@ const getColumnStats = (data) => {
 
 router.post('/suggest/:recordId', protect, async (req, res) => {
   try {
-    const { viewMode } = req.body; // Get 2D or 3D
+    const { viewMode } = req.body;
     if (!GROQ_API_KEY) {
       return res.status(500).json({ success: false, message: 'GROQ API key missing' });
     }
@@ -63,7 +66,6 @@ router.post('/suggest/:recordId', protect, async (req, res) => {
 
     const table = generateTableFromJson(jsonData);
     const columnStats = getColumnStats(jsonData);
-
     const is3D = viewMode === '3D';
 
     const prompt = `
@@ -139,4 +141,4 @@ Respond in this JSON format:
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,9 +1,9 @@
-const express = require('express');
+import express from 'express';
+import RecentChart from '../models/recentChart.js';
+import ExcelRecord from '../models/excelRecord.js';
+import { protect } from '../middleware/auth.js';
+ 
 const router = express.Router();
-const RecentChart = require('../models/recentChart');
-const ExcelRecord = require('../models/excelRecord');
-const { protect } = require('../middleware/auth');
-
 // POST /api/recentCharts
 router.post('/', protect, async (req, res) => {
   try {
@@ -44,4 +44,4 @@ router.get('/', protect, async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

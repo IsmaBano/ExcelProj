@@ -1,28 +1,23 @@
-const jwt = require("jsonwebtoken");
-const userModel = require("../models/user");
+import jwt from "jsonwebtoken";
+import userModel from "../models/user.js";
 
 // Middleware to protect routes and update lastSeen
-const protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   let token;
 
-  // Check for Bearer token
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
       token = req.headers.authorization.split(" ")[1];
-
-      // Verify token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // Get user from DB (excluding password)
       const user = await userModel.findById(decoded.id).select("-password");
       if (!user) {
         return res.status(401).json({ success: false, message: "User not found" });
       }
 
-      //  Update lastSeen
       user.lastSeen = new Date();
       await user.save();
 
@@ -41,8 +36,8 @@ const protect = async (req, res, next) => {
   }
 };
 
-//  Middleware to allow only admins
-const adminOnly = (req, res, next) => {
+// Middleware to allow only admins
+export const adminOnly = (req, res, next) => {
   if (!req.user) {
     return res.status(401).json({
       success: false,
@@ -57,8 +52,5 @@ const adminOnly = (req, res, next) => {
     });
   }
 
-  //  All good — proceed
   next();
 };
-
-module.exports = { protect, adminOnly };
