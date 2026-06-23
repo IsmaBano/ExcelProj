@@ -27,3 +27,7 @@ coverage/
 # Optional: Ignore local environment settings
 .env.local
 .env.*.local
+node_modules
+.env
+*.log
+docker-data/

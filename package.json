@@ -2,8 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "server.js",
-  "type": "commonjs",
-  
+  "type": "module",
   "scripts": {
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
@@ -22,9 +21,11 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "kafkajs": "^2.2.4",
     "math-intrinsics": "^1.1.0",
     "mongoose": "^8.15.0",
     "multer": "^2.0.0",
+    "redis": "^6.0.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
