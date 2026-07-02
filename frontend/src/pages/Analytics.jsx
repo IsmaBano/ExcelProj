@@ -80,7 +80,7 @@ useEffect(() => {
         setYColumn(keys.length > 1 ? keys[1] : keys[0]);
         setZColumn(keys.length > 2 ? keys[2] : keys[0]);
       }
-
+     console.log(record);
       if (!hasLoggedAnalyze.current && location.state?.from !== 'recentCharts') {
         hasLoggedAnalyze.current = true;
 

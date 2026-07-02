@@ -2,7 +2,8 @@ version: "3.8"
 
 services:
   backend:
-    build: .
+    build:
+      context: .
     ports:
       - "8000:8000"
     env_file:
@@ -11,6 +12,9 @@ services:
       - mongo
       - redis
       - kafka
+    volumes:
+      - .:/app
+      - /app/node_modules
 
   mongo:
     image: mongo:latest
@@ -41,7 +45,6 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1

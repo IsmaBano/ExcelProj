@@ -38,7 +38,7 @@ function AppRoutes() {
       if (!token) return;
 
       axios
-        .patch(`${BACKEND_URL}+/api/user/ping`, {}, {
+        .patch(`${BACKEND_URL}/api/user/ping`, {}, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .catch((err) => {

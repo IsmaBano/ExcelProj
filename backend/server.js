@@ -92,17 +92,9 @@ app.get("/api/storage", async (req, res) => {
 });
 
 // -------------------- Kafka Usage --------------------
-// Start consumer
 startConsumer("file-uploads");
 
-// Example: send Kafka event when file uploaded
-app.post("/api/uploadEvent", async (req, res) => {
-  const { fileId } = req.body;
-  await sendEvent("file-uploads", { fileId, status: "uploaded" });
-  res.json({ success: true, message: "Event sent to Kafka" });
-});
 
-// -------------------- Frontend Serving --------------------
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

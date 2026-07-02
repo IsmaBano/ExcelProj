@@ -1,10 +1,10 @@
 import express from 'express';
 import multer from 'multer';
 import path from 'path';
-import XLSX from 'xlsx';
 import ExcelRecord from '../models/excelRecord.js';
 import Activity from '../models/Activity.js';
 import { protect } from '../middleware/auth.js';
+import { sendEvent } from '../kafka.js';
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 
 // @route   POST /api/upload
-// @desc    Upload Excel file, parse & store data, log activity
+// @desc    Upload Excel file, save metadata, publish Kafka event
 // @access  Protected
 router.post('/', protect, upload.single('file'), async (req, res) => {
   try {
@@ -28,28 +28,12 @@ router.post('/', protect, upload.single('file'), async (req, res) => {
       return res.status(400).json({ message: 'No file uploaded' });
     }
 
-    // Parse Excel from buffer
-    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
-    const sheetName = workbook.SheetNames[0];
-    const sheet = workbook.Sheets[sheetName];
-    const jsonData = XLSX.utils.sheet_to_json(sheet);
-
-    // Calculate metadata
-    const numRows = jsonData.length;
-    const numCols = numRows > 0 ? Object.keys(jsonData[0]).length : 0;
-    const numSheets = workbook.SheetNames.length;
-    const emptyRows = jsonData.filter(row =>
-      Object.values(row).every(cell => cell === null || cell === '')
-    ).length;
-
-    // Save Excel data to DB
+    // Save metadata only
     const newRecord = new ExcelRecord({
       filename: req.file.originalname,
-      data: jsonData,
       uploadedBy: req.user.id,
       uploadedAt: new Date(),
     });
-
     const savedRecord = await newRecord.save();
 
     // Log activity
@@ -60,19 +44,19 @@ router.post('/', protect, upload.single('file'), async (req, res) => {
       timestamp: new Date(),
     });
 
-    
-    // Send back metadata in response
+    // Publish job to Kafka (send buffer for parsing)
+   await sendEvent("file-uploads", {
+  fileId: savedRecord._id,
+  filename: req.file.originalname,
+  buffer: req.file.buffer,
+  action: "parse",
+  userId: req.user.id,
+});
+
     res.status(200).json({
       success: true,
-      message: 'File uploaded and saved successfully',
-      record: {
-        _id: savedRecord._id,
-        filename: req.file.originalname,
-        numRows,
-        numCols,
-        numSheets,
-        emptyRows,
-      },
+      message: 'Upload received, processing in background',
+      record: { _id: savedRecord._id, filename: req.file.originalname }
     });
   } catch (error) {
     console.error('Upload error:', error);
